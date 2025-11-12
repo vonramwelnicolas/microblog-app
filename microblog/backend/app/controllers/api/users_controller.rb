@@ -6,12 +6,15 @@ class Api::UsersController < ApplicationController
     @users = User.all
     render json: @users.as_json(only: [:id, :name, :email, :created_at, :updated_at])
   end
-  
+
   def create
     user = User.new(user_params)
     if user.save
       token = JsonWebToken.encode(user_id: user.id)
-      render json: { user: user, token: token }, status: :created
+      render json: { 
+        user: user.as_json(only: [:id, :name, :email, :created_at, :updated_at]), 
+        token: token 
+      }, status: :created
     else
       render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
     end

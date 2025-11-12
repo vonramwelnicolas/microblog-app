@@ -1,5 +1,6 @@
 class Api::BlogsController < ApplicationController
   before_action :set_blog, only: %i[ show update destroy ]
+  before_action :authorize_blog_owner, only: %i[ update destroy ]
 
   # GET /blogs
   def index
