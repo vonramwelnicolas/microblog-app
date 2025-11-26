@@ -1,0 +1,20 @@
+{
+    "name": "microblog-backend",
+    "description": "Microblog Rails API",
+    "scripts": {
+      "dokku": {
+        "predeploy": "bundle exec rails db:migrate",
+        "postdeploy": "bundle exec rails db:seed"
+      }
+    },
+    "formation": {
+      "web": {
+        "quantity": 1,
+        "size": "basic"
+      }
+    },
+    "env": {
+      "RAILS_ENV": "production",
+      "RAILS_SERVE_STATIC_FILES": "true"
+    }
+  }
